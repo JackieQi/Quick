@@ -6,7 +6,7 @@ import QuickTestHelpers
 #endif
 
 class FunctionalTests_FocusedSpec_SharedExamplesConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("two passing shared examples") {
             it("has an example that passes (4)") {}
             it("has another example that passes (5)") {}
@@ -52,6 +52,6 @@ class FocusedTests: XCTestCase, XCTestCaseProvider {
             FunctionalTests_FocusedSpec_Focused.self,
             FunctionalTests_FocusedSpec_Unfocused.self
         ])
-        XCTAssertEqual(result.executionCount, 5 as UInt)
+        XCTAssertEqual(result?.executionCount, 5 as UInt)
     }
 }

@@ -29,7 +29,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                     FunctionalTests_ItSpec.allSelectors()
                         .filter { $0.hasPrefix("when_an_example_has_a_unique_name__") }
                     )
-                    .sort(<)
+                    .sorted(by: <)
                 
                 expect(allSelectors) == [
                     "when_an_example_has_a_unique_name__doesn_t_add_multiple_selectors_for_it",
@@ -47,7 +47,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                     FunctionalTests_ItSpec.allSelectors()
                         .filter { $0.hasPrefix("when_two_examples_have_the_exact_name__") }
                     )
-                    .sort(<)
+                    .sorted(by: <)
                 
                 expect(allSelectors) == [
                     "when_two_examples_have_the_exact_name__has_exactly_the_same_name",
@@ -63,7 +63,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                 expect {
                     it("will throw an error when it is nested in another it") { }
                     }.to(raiseException { (exception: NSException) in
-                        expect(exception.name).to(equal(NSInternalInconsistencyException))
+                        expect(exception.name).to(equal(NSExceptionName.internalInconsistencyException))
                         expect(exception.reason).to(equal("'it' cannot be used inside 'it', 'it' may only be used inside 'context' or 'describe'. "))
                         })
             }
@@ -76,7 +76,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                         exception = e
                     }), finally: nil)
 
-                    capture.tryBlock {
+                    capture.try {
                         it("a rogue 'it' inside a 'beforeEach'") { }
                         return
                     }
@@ -98,7 +98,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                         expect(exception!.reason).to(equal("'it' cannot be used inside 'afterEach', 'it' may only be used inside 'context' or 'describe'. "))
                     }), finally: nil)
 
-                    capture.tryBlock {
+                    capture.try {
                         it("a rogue 'it' inside an 'afterEach'") { }
                         return
                     }
@@ -121,7 +121,7 @@ class ItTests: XCTestCase, XCTestCaseProvider {
 #if _runtime(_ObjC)
     func testAllExamplesAreExecuted() {
         let result = qck_runSpec(FunctionalTests_ItSpec.self)
-        XCTAssertEqual(result.executionCount, 10 as UInt)
+        XCTAssertEqual(result?.executionCount, 10 as UInt)
     }
 #else
     func testAllExamplesAreExecuted() {

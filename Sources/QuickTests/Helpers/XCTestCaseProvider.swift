@@ -23,8 +23,8 @@ extension XCTestCase {
 }
 
 extension XCTestCaseProvider {
-    private func assertContainsTest(name: String) {
-        let contains = self.allTests.contains({ test in
+    private func assertContainsTest(_ name: String) {
+        let contains = self.allTests.contains(where: { test in
             return test.0 == name
         })
 

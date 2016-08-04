@@ -37,6 +37,6 @@ class BeforeSuiteTests: XCTestCase, XCTestCaseProvider {
             FunctionalTests_BeforeSuite_BeforeSuiteSpec.self
             ])
 
-        XCTAssert(result.hasSucceeded)
+        XCTAssert((result?.hasSucceeded)!)
     }
 }

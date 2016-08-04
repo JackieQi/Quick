@@ -38,7 +38,7 @@ class PendingTests: XCTestCase, XCTestCaseProvider {
 
     func testAnOtherwiseFailingExampleWhenMarkedPendingDoesNotCauseTheSuiteToFail() {
         let result = qck_runSpec(FunctionalTests_PendingSpec.self)
-        XCTAssert(result.hasSucceeded)
+        XCTAssert((result?.hasSucceeded)!)
     }
 
     func testBeforeEachOnlyRunForEnabledExamples() {
