@@ -1,3 +1,4 @@
 [submodule "Externals/Nimble"]
 	path = Externals/Nimble
 	url = https://github.com/JackieQi/Nimble.git
+        branch = swift3
