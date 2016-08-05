@@ -76,7 +76,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                         exception = e
                     }), finally: nil)
 
-                    capture.try {
+                    capture.tryBlock {
                         it("a rogue 'it' inside a 'beforeEach'") { }
                         return
                     }
@@ -98,7 +98,7 @@ class FunctionalTests_ItSpec: QuickSpec {
                         expect(exception!.reason).to(equal("'it' cannot be used inside 'afterEach', 'it' may only be used inside 'context' or 'describe'. "))
                     }), finally: nil)
 
-                    capture.try {
+                    capture.tryBlock {
                         it("a rogue 'it' inside an 'afterEach'") { }
                         return
                     }
